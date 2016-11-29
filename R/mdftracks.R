@@ -60,7 +60,9 @@ getTrackDF <- function(mdf.lines, track_bounds) {
     # Get correct rows from xls_data
     t <- mdf.lines[x$begin:x$end]
     t <- t[grep("^Point", t)]
-    t.df <- read.delim(textConnection(t), sep = " ", header = F)
+    con <- textConnection(t)
+    t.df <- read.delim(con, sep = " ", header = F)
+    close(con)
     # Put in the correct track id
     t.df$V1 <- x$id
     colnames(t.df) <- c('id', 'point', 'x', 'y', 'z', 't', 'c')
