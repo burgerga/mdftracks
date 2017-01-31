@@ -4,6 +4,7 @@
 #'
 #' @docType package
 #' @name mdftracks
+#' @import hellno
 NULL
 
 #' Read an MTrackJ track file (.mdf)
@@ -12,7 +13,7 @@ NULL
 #'
 #' @param file The MTrackJ .mdf file with the tracks.
 #'
-#' @family icytracks functions
+#' @family mdftracks functions
 #'
 #' @export
 #'
@@ -22,10 +23,17 @@ NULL
 #' }
 read.mdf <- function(file, drop.Z = F, include.point.numbers = FALSE, include.channel = F) {
   mdf.lines <- readFileLines(file)
-  track.bounds <- getTrackBoundsFromMDFLines(mdf.lines)
-  df <- getTrackDF(mdf.lines, track.bounds)
+  cluster.bounds <- getClusterBounds(mdf.lines)
+  cluster.lines.list <- getClusterLines(mdf.lines, cluster.bounds)
+  cluster.track.list <- lapply(cluster.lines.list, getClusterTracks)
+  # Add cluster number
+  cluster.track.list <- mapply(function(df, id) {
+    df$cluster <- id
+    df
+  }, cluster.track.list, cluster.bounds$id, SIMPLIFY = F)
+  df <- do.call(rbind, cluster.track.list)
 
-   cols <- c('id', 't', 'x', 'y')
+  cols <- c('cluster', 'id', 't', 'x', 'y')
   if(!drop.Z) { cols <- c(cols, "z")}
   if(include.point.numbers) { cols <- c(cols, "point")}
   if(include.channel) { cols <- c(cols, "c")}
@@ -48,27 +56,46 @@ readFileLines <- function(file) {
   lines
 }
 
-getTrackBoundsFromMDFLines <- function(mdf.lines) {
+getTrackBounds <- function(mdf.lines) {
   track.lines <- grep("^Track", mdf.lines)
-  track.nrs <- sapply(strsplit(mdf.lines[track.lines], " "), "[[", 2)
-  data.frame(id = track.nrs, begin = track.lines + 1, end = c(track.lines[-1], length(mdf.lines)) - 1)
+  track.nrs <- as.numeric(sapply(strsplit(mdf.lines[track.lines], " "), "[[", 2))
+  data.frame(id = track.nrs, begin = track.lines + 1, end = c(track.lines[-1], length(mdf.lines)))
 }
 
-getTrackDF <- function(mdf.lines, track_bounds) {
-  track_bound_l <- split(track_bounds, track_bounds$id)
-  track_df_l <- invisible(lapply(track_bound_l, function(x) {
-    # Get correct rows from xls_data
-    t <- mdf.lines[x$begin:x$end]
+getClusterBounds <- function(mdf.lines) {
+  cluster.lines <- grep("^Cluster", mdf.lines)
+  cluster.nrs <- as.numeric(sapply(strsplit(mdf.lines[cluster.lines], " "), "[[", 2))
+  # -1 for the last line in the file
+  data.frame(id = cluster.nrs, begin = cluster.lines + 1, end = c(cluster.lines[-1], length(mdf.lines)) - 1)
+}
+
+getClusterLines <- function(mdf.lines, cluster.bounds) {
+  cluster.bounds.l <- split(cluster.bounds, cluster.bounds$id)
+  cluster.lines.l <- invisible(lapply(cluster.bounds.l, function(x) {
+    mdf.lines[x$begin:x$end]
+  }))
+}
+
+getClusterTracks <- function(cluster.lines) {
+  track.bounds <- getTrackBounds(cluster.lines)
+  track.bounds.l <- split(track.bounds, track.bounds$id)
+  track.df.l <- invisible(lapply(track.bounds.l, function(x) {
+    # Get correct rows from cluster.lines
+    t <- cluster.lines[x$begin:x$end]
+    # Filter out Point lines
     t <- t[grep("^Point", t)]
+    # Read lines as data frame
     con <- textConnection(t)
     t.df <- read.delim(con, sep = " ", header = F)
     close(con)
-    # Put in the correct track id
-    t.df$V1 <- x$id
+    # Rename columns
     colnames(t.df) <- c('id', 'point', 'x', 'y', 'z', 't', 'c')
+    # Put in the correct track id
+    t.df$id <- x$id
+
     t.df
   }))
   # Bind list together to get the DF, then convert to data matrix (make numeric),
   # then back to DF
-  as.data.frame(data.matrix(do.call(rbind, track_df_l)))
+  as.data.frame(data.matrix(do.call(rbind, track.df.l)))
 }
