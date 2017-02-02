@@ -10,3 +10,4 @@ Imports: hellno
 URL: https://github.com/burgerga/mdftracks
 BugReports: https://github.com/burgerga/mdftracks/issues
 RoxygenNote: 6.0.0
+Suggests: testthat
