@@ -9,4 +9,4 @@ LazyData: TRUE
 Imports: hellno
 URL: https://github.com/burgerga/mdftracks
 BugReports: https://github.com/burgerga/mdftracks/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.0
