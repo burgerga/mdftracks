@@ -51,9 +51,8 @@ getMTrackJVersion <- function(mdf.lines) {
 
 readFileLines <- function(file) {
   con <- file(file, open="r")
-  lines <- readLines(con)
-  close(con)
-  lines
+  on.exit(close(con))
+  readLines(con)
 }
 
 getTrackBounds <- function(mdf.lines) {
@@ -86,8 +85,8 @@ getClusterTracks <- function(cluster.lines) {
     t <- t[grep("^Point", t)]
     # Read lines as data frame
     con <- textConnection(t)
+    on.exit(close(con))
     t.df <- read.delim(con, sep = " ", header = F)
-    close(con)
     # Rename columns
     colnames(t.df) <- c('id', 'point', 'x', 'y', 'z', 't', 'c')
     # Put in the correct track id
