@@ -24,3 +24,8 @@ test_that("Include channel", {
   expect_equivalent(read.mdf('test_mdf.mdf', include.channel = T),
                     test.df[,c('cl', 'id', 't', letters[24:26], 'ch')])
 })
+
+test_that("Generate unique ids", {
+  expect_equivalent(read.mdf('test_mdf.mdf', generate.unique.ids = T),
+                    test.df[,c('cl', 'id', 't', letters[24:26], 'uid')])
+})

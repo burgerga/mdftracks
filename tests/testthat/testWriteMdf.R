@@ -4,10 +4,6 @@ context("Writing mdf tracks")
 # Load reference data
 load('test_df.RData')
 
-# Add unique identifier column
-test.df <- within(test.df, uid <- as.numeric(factor(paste(cl,id, sep = "."))))
-
-
 test_that("Data frames with columns id, t, x, y, z (MotilyLab) can be exported
           using default arguments (numeric columns)", {
   expected_output <- "^MTrackJ [0-9.]+ Data File

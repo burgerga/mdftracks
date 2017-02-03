@@ -40,23 +40,37 @@ pkg.env$mtrackj.version <- '1.5.1'
 #' read.mdf('~/mdftracks.mdf', generate.unique.ids = T)
 #' }
 read.mdf <- function(file, drop.Z = F, include.point.numbers = FALSE,
-                     include.channel = F) {
+                     include.channel = F, generate.unique.ids = F) {
   mdf.lines <- readFileLines(file)
   cluster.bounds <- getClusterBounds(mdf.lines)
   cluster.lines.list <- getClusterLines(mdf.lines, cluster.bounds)
   cluster.track.list <- lapply(cluster.lines.list, getClusterTracks)
+
   # Add cluster number
   cluster.track.list <- mapply(function(df, id) {
     df$cluster <- id
     df
   }, cluster.track.list, cluster.bounds$id, SIMPLIFY = F)
+  # Merge to one data frame
   df <- do.call(rbind, cluster.track.list)
 
+  # Select columns of interest
   cols <- c('cluster', 'id', 'time', 'x', 'y')
   if(!drop.Z) { cols <- c(cols, "z")}
   if(include.point.numbers) { cols <- c(cols, "point")}
   if(include.channel) { cols <- c(cols, "channel")}
   df <- df[, cols]
+
+  # Generate unique ids
+  if(generate.unique.ids) {
+    if(length(unique(df$cluster)) == 1) {
+      # Only one cluster, uid = id
+      df$uid <- df$id
+    } else {
+      # Multiple clusters, create uid based on cl and id
+      df$uid <- as.numeric(factor(paste(df$cluster, df$id, sep = ".")))
+    }
+  }
 
   attr(df, "doc") <- paste0("Read from ", mdf.lines[[1]])
   df
