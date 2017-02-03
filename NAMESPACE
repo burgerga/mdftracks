@@ -3,3 +3,5 @@
 export(read.mdf)
 export(write.mdf)
 import(hellno)
+importFrom(utils,capture.output)
+importFrom(utils,read.delim)

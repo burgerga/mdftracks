@@ -2,19 +2,68 @@
 % Please edit documentation in R/mdftracks.R
 \name{write.mdf}
 \alias{write.mdf}
-\title{Write an MTrackJ track file (.mdf)}
+\title{Write an MTrackJ Data Format (.mdf) file}
 \usage{
 write.mdf(x, file = "", cluster.column = NA, id.column = 1,
-  time.column = 2, pos.columns = c(3, 4, 5), fileEncoding = "")
+  time.column = 2, scale.time = 1, pos.columns = c(3, 4, 5),
+  channel.column = NA, point.column = NA, default.channel = 1,
+  fileEncoding = "")
+}
+\arguments{
+\item{x}{the data.frame with track information.}
+
+\item{file}{either a character string naming a file or a connection open for
+writing. "" indicates output to the console.}
+
+\item{cluster.column}{index or name of the column that contains the cluster
+ID.}
+
+\item{id.column}{index or name of the column that contains the track
+ID (either the id in the cluster or a unique id).}
+
+\item{time.column}{index or name of the column that contains elapsed time}
+
+\item{scale.time}{a value by which to multiply each time point. Useful for
+changing units, or specifying the time between positions if the time is given
+in frames.}
+
+\item{pos.columns}{vector containing indices or names of the columns that
+contain the spatial coordinates. If this vector has two entries, the data is
+assumed to be 2D and the z coordinate is set to 1.0.}
+
+\item{channel.column}{index or name of the column that contains channel
+information. If there is no channel column \code{default.channel} will be used.}
+
+\item{point.column}{index or name of the column that contains point ID. If
+there is no point column, points will be numbered automatically (\strong{NB} points
+are not necessarily the same as frames).}
+
+\item{default.channel}{channel to be used if \code{channel.column} is not
+specified.}
+
+\item{fileEncoding}{character string: if non-empty declares the encoding to
+be used on a file (not a connection) so the character data can be re-encoded
+as they are written. See \code{\link[base:file]{base::file()}}.}
 }
 \description{
-Write an MTrackJ track file (.mdf)
+Writes a data.frame with tracking information as an MTrackJ Data Format (.mdf)
+file. Allows flexible column specification, and to avoid errors the column
+mapping used for writing is reported back to the user. Writing tracking data in
+'id time x y z' format, for example, from the MotilityLab package, doesn't
+require additional arguments.
 }
 \examples{
 \dontrun{
 write.mdf(x, '~/mdftracks.mdf')
+
+# 2D data with column name specification
+write.mdf(x, '~/mdftracks.mdf', id.column = 'uid', time.column = 't',
+          pos.columns = letters[24:25])
 }
+
 }
 \seealso{
+\href{https://imagescience.org/meijering/software/mtrackj/format/}{MTrackJ Data Format}
+
 Other mdftracks functions: \code{\link{read.mdf}}
 }
