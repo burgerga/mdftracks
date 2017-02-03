@@ -2,7 +2,7 @@ mdftracks
 ================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/burgerga/mdftracks.svg?branch=master)](https://travis-ci.org/burgerga/mdftracks)
+[![Build Status](https://travis-ci.org/burgerga/mdftracks.svg?branch=master)](https://travis-ci.org/burgerga/mdftracks) [![codecov](https://codecov.io/gh/burgerga/mdftracks/branch/master/graph/badge.svg)](https://codecov.io/gh/burgerga/mdftracks)
 
 Reads and writes '.mdf' (MTrackJ Data Format) files. Supports clusters, 2D data, and channel information. If desired, generates unique track identifiers based on cluster and id data from the '.mdf' file.
 
