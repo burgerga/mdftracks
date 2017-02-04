@@ -29,3 +29,8 @@ test_that("Generate unique ids", {
   expect_equivalent(read.mdf('test_mdf.mdf', generate.unique.ids = T),
                     test.df[,c('cl', 'id', 't', letters[24:26], 'uid')])
 })
+
+test_that("Error if not mdf format", {
+  expect_error(read.mdf(text = "not mdf"),
+               "does not appear to be an MTrackJ Data File")
+})

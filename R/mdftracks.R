@@ -14,6 +14,7 @@ NULL
 # Store package local variables
 pkg.env <- new.env(parent = emptyenv())
 pkg.env$mtrackj.version <- '1.5.1'
+pkg.env$mtrackj.header <- "MTrackJ %s Data File"
 
 
 #' Read an MTrackJ Data Format (.mdf) file
@@ -40,8 +41,34 @@ pkg.env$mtrackj.version <- '1.5.1'
 #' read.mdf('~/mdftracks.mdf', generate.unique.ids = T)
 #' }
 read.mdf <- function(file, drop.Z = F, include.point.numbers = FALSE,
-                     include.channel = F, generate.unique.ids = F) {
-  mdf.lines <- readFileLines(file)
+                     include.channel = F, generate.unique.ids = F, text,
+                     fileEncoding = "") {
+  if (missing(file) && !missing(text)) {
+    file <- textConnection(text, encoding = "UTF-8")
+    encoding <- "UTF-8"
+    on.exit(close(file))
+  }
+  if (is.character(file)) {
+    file <- if (nzchar(fileEncoding))
+      file(file, "rt", encoding = fileEncoding)
+    else file(file, "rt")
+    on.exit(close(file))
+  }
+  if (!inherits(file, "connection"))
+    stop("'file' must be a character string or connection")
+  if (!isOpen(file, "rt")) {
+    open(file, "rt")
+    on.exit(close(file))
+  }
+
+  # Read first line
+  mdf.lines <- readLines(file, n = 1)
+  if(!grepl(sprintf(pkg.env$mtrackj.header, '[0-9]+(.[0-9]+)*'), mdf.lines)) {
+    stop("does not appear to be an MTrackJ Data File")
+  }
+  message(mdf.lines)
+  mdf.lines <- c(mdf.lines, readLines(file))
+
   cluster.bounds <- getClusterBounds(mdf.lines)
   cluster.lines.list <- getClusterLines(mdf.lines, cluster.bounds)
   cluster.track.list <- lapply(cluster.lines.list, getClusterTracks)
@@ -166,14 +193,14 @@ write.mdf <- function(x, file = "", cluster.column = NA, id.column = 1,
     else file(file, "w")
     on.exit(close(file))
   }
-  else if (!isOpen(file, "w")) {
+  if (!inherits(file, "connection"))
+    stop("'file' must be a character string or connection")
+  if (!isOpen(file, "w")) {
     open(file, "w")
     on.exit(close(file))
   }
-  if (!inherits(file, "connection"))
-    stop("'file' must be a character string or connection")
 
-  writeLines(sprintf("MTrackJ %s Data File", pkg.env$mtrackj.version), file,
+  writeLines(sprintf(pkg.env$mtrackj.header, pkg.env$mtrackj.version), file,
              sep = '\n')
   writeLines("Assembly 1", file, sep = '\n')
   cluster.l <- split(x, x[cn['cl']])
@@ -201,19 +228,11 @@ write.mdf <- function(x, file = "", cluster.column = NA, id.column = 1,
 }
 
 
-getMTrackJVersion <- function(mdf.lines) {
-  first.line.split <- strsplit(mdf.lines[[1]], " ")[[1]]
-  stopifnot(first.line.split[1] == "MTrackJ")
-  first.line.split[2]
-}
-
-
-readFileLines <- function(file) {
-  con <- file(file, open="r")
-  on.exit(close(con))
-  readLines(con)
-}
-
+# getMTrackJVersion <- function(mdf.lines) {
+#   first.line.split <- strsplit(mdf.lines[[1]], " ")[[1]]
+#   stopifnot(first.line.split[1] == "MTrackJ")
+#   first.line.split[2]
+# }
 
 getTrackBounds <- function(mdf.lines) {
   track.lines <- grep("^Track", mdf.lines)

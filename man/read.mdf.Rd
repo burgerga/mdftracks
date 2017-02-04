@@ -5,7 +5,7 @@
 \title{Read an MTrackJ Data Format (.mdf) file}
 \usage{
 read.mdf(file, drop.Z = F, include.point.numbers = FALSE,
-  include.channel = F, generate.unique.ids = F)
+  include.channel = F, generate.unique.ids = F, text, fileEncoding = "")
 }
 \arguments{
 \item{file}{MTrackJ .mdf file with tracking data.}

@@ -1,12 +1,11 @@
 library(mdftracks)
+library(tools)
 context("Writing mdf tracks")
 
 # Load reference data
 load('test_df.RData')
 
-test_that("Data frames with columns id, t, x, y, z (MotilyLab) can be exported
-          using default arguments (numeric columns)", {
-  expected_output <- "^MTrackJ [0-9.]+ Data File
+ref_expected_output <- "^MTrackJ [0-9.]+ Data File
 Assembly 1
 Cluster 1
 Track 1
@@ -25,8 +24,49 @@ Track 5
 Point 1 8.4 305.8 30.2 1.0 1.0
 Point 2 84.7 227.7 21.1 2.0 1.0
 End of MTrackJ Data File$"
+ref.file <- 'test_mdf.mdf'
+
+test_that("Data frames with columns id, t, x, y, z (MotilyLab) can be exported
+          using default arguments (numeric columns)", {
   expect_output(write.mdf(test.df[,c('uid','t', 'x', 'y', 'z')]),
-                expected_output)
+                ref_expected_output)
+})
+
+test_that("Output to file works", {
+  file <- "temp_test_mdf.mdf"
+  unlink(file)
+  on.exit(unlink(file))
+  write.mdf(test.df, file, cluster.column = "cl", id.column = "id",
+            time.column = "t", pos.columns = letters[24:26],
+            channel.column = "ch", point.column = "p")
+  expect_true(file.exists(file))
+  expect_equal(md5sum(file)[[1]], md5sum(ref.file)[[1]])
+})
+
+test_that("Output to file connection works when connection is closed", {
+  file <- "temp_test_mdf.mdf"
+  unlink(file)
+  on.exit(unlink(file))
+  con <- file(file)
+  expect_false(isOpen(con))
+  write.mdf(test.df, con, cluster.column = "cl", id.column = "id",
+            time.column = "t", pos.columns = letters[24:26],
+            channel.column = "ch", point.column = "p")
+  expect_true(file.exists(file))
+  expect_equal(md5sum(file)[[1]], md5sum(ref.file)[[1]])
+})
+
+test_that("Output to connection works", {
+  dest.string <- ""
+  con <- textConnection("dest.string", open = "w", local = T)
+  on.exit(close(con))
+  write.mdf(test.df[,c('uid','t', 'x', 'y', 'z')], con)
+  expect_output(writeLines(dest.string), ref_expected_output)
+})
+
+test_that("Output to non-connections fails", {
+  expect_error(write.mdf(test.df[,c('uid','t', 'x', 'y', 'z')], file = T),
+               "'file' must be a character string or connection", fixed = T)
 })
 
 test_that("time is correctly scaled", {
@@ -129,4 +169,13 @@ End of MTrackJ Data File$"
                           pos.columns = letters[24:26], channel.column = 'ch',
                           point.column = 'p', time.column = 't'),
                 expected_output)
+})
+
+test_that("Invalid column specification should give errors", {
+  expect_error(
+    write.mdf(test.df[,c('uid','t', 'x', 'y', 'z')], id.column = "id"),
+    "Column(s) not found: id", fixed = T)
+  expect_error(
+    write.mdf(test.df[,c('uid','t', 'x', 'y', 'z')], id.column = 10),
+    "Column(s) not found: 10", fixed = T)
 })
