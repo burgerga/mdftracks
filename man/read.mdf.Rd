@@ -18,6 +18,14 @@ read.mdf(file, drop.Z = F, include.point.numbers = FALSE,
 \item{include.channel}{include channel information}
 
 \item{generate.unique.ids}{combine cluster and id columns to get unique ids}
+
+\item{text}{character string: if file is not supplied and this is, then data
+are read from the value of text via a text connection. Notice that a literal
+string can be used to include (small) data sets within R code.}
+
+\item{fileEncoding}{character string: if non-empty declares the encoding to
+be used on a file (not a connection) so the character data can be re-encoded
+as they are written. See \code{\link[base:file]{base::file()}}.}
 }
 \description{
 Reads an MTrackJ Data Format (.mdf) file in a data.frame.

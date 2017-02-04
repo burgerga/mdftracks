@@ -27,6 +27,12 @@ pkg.env$mtrackj.header <- "MTrackJ %s Data File"
 #' (**NB** #' these can be different from the time/frame points)
 #' @param include.channel include channel information
 #' @param generate.unique.ids combine cluster and id columns to get unique ids
+#' @param text character string: if file is not supplied and this is, then data
+#' are read from the value of text via a text connection. Notice that a literal
+#' string can be used to include (small) data sets within R code.
+#' @param fileEncoding character string: if non-empty declares the encoding to
+#' be used on a file (not a connection) so the character data can be re-encoded
+#' as they are written. See [base::file()].
 #'
 #' @family mdftracks functions
 #'
