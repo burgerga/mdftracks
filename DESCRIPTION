@@ -1,7 +1,7 @@
 Package: mdftracks
 Type: Package
 Title: Read and Write 'MTrackJ' Data Files
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: person("Gerhard", "Burger", email = "burger.ga@gmail.com", role = c("aut", "cre"))
 Description: Reads and writes 'MTrackJ' Data Files ('.mdf'). 
     Supports clusters, 2D data, and channel information. If desired, generates 
