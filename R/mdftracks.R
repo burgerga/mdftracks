@@ -51,7 +51,6 @@ read.mdf <- function(file, drop.Z = F, include.point.numbers = FALSE,
                      fileEncoding = "") {
   if (missing(file) && !missing(text)) {
     file <- textConnection(text, encoding = "UTF-8")
-    encoding <- "UTF-8"
     on.exit(close(file))
   }
   if (is.character(file)) {
@@ -273,9 +272,7 @@ getClusterTracks <- function(cluster.lines) {
     # Filter out Point lines
     t <- t[grep("^Point", t)]
     # Read lines as data frame
-    con <- textConnection(t)
-    on.exit(close(con))
-    t.df <- read.delim(con, sep = " ", header = F)
+    t.df <- read.delim(sep = " ", header = F, text = t)
     # Rename columns
     colnames(t.df) <- c('id', 'point', 'x', 'y', 'z', 'time', 'channel')
     # Put in the correct track id
