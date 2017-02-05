@@ -62,6 +62,7 @@ test_that("Output to connection works", {
   on.exit(close(con))
   write.mdf(test.df[,c('uid','t', 'x', 'y', 'z')], con)
   expect_output(writeLines(dest.string), ref_expected_output)
+  expect_true(isOpen(con))
 })
 
 test_that("Output to non-connections fails", {
