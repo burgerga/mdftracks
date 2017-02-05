@@ -26,6 +26,9 @@ Point 2 84.7 227.7 21.1 2.0 1.0
 End of MTrackJ Data File$"
 ref.file <- 'test_mdf.mdf'
 
+# md5 of test_mdf.mdf (dos and unix line endings)
+ref.mdf5s <- c('4f8edce70d7d7298a176fa420d3a0b26', '565e878e87af073aac2e91fe20c94a8f')
+
 test_that("Data frames with columns id, t, x, y, z (MotilyLab) can be exported
           using default arguments (numeric columns)", {
   expect_output(write.mdf(test.df[,c('uid','t', 'x', 'y', 'z')]),
@@ -40,7 +43,7 @@ test_that("Output to file works", {
             time.column = "t", pos.columns = letters[24:26],
             channel.column = "ch", point.column = "p")
   expect_true(file.exists(file))
-  expect_equal(md5sum(file)[[1]], md5sum(ref.file)[[1]])
+  expect_true(md5sum(file)[[1]] %in% ref.mdf5s)
 })
 
 test_that("Output to file connection works when connection is closed", {
@@ -53,7 +56,7 @@ test_that("Output to file connection works when connection is closed", {
             time.column = "t", pos.columns = letters[24:26],
             channel.column = "ch", point.column = "p")
   expect_true(file.exists(file))
-  expect_equal(md5sum(file)[[1]], md5sum(ref.file)[[1]])
+  expect_true(md5sum(file)[[1]] %in% ref.mdf5s)
 })
 
 test_that("Output to connection works", {
