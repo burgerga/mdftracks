@@ -4,11 +4,11 @@
 \name{mdftracks}
 \alias{mdftracks}
 \alias{mdftracks-package}
-\title{mdftracks:  Read and Write MTrackJ Data Format Files}
+\title{mdftracks:  Read and Write MTrackJ Data Files}
 \description{
-Reads and writes '.mdf' (MTrackJ Data Format) files.
+Reads and writes MTrackJ Data Files (\code{.mdf}).
 Supports clusters, 2D data, and channel information. If desired, generates
-unique track identifiers based on cluster and id data from the '.mdf' file.
+unique track identifiers based on cluster and id data from the \code{.mdf} file.
 }
 \seealso{
 \href{https://imagescience.org/meijering/software/mtrackj/format/}{MTrackJ Data Format}

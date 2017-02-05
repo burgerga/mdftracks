@@ -13,32 +13,74 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r, echo=F}
+library('mdftracks')
+load('tests/testthat/test_df.RData')
+```
+
 [![Build Status](https://travis-ci.org/burgerga/mdftracks.svg?branch=master)](https://travis-ci.org/burgerga/mdftracks)
 [![codecov](https://codecov.io/gh/burgerga/mdftracks/branch/master/graph/badge.svg)](https://codecov.io/gh/burgerga/mdftracks)
 
+Reads and writes **[MTrackJ](https://imagescience.org/meijering/software/mtrackj/) Data Files** ([`.mdf`](https://imagescience.org/meijering/software/mtrackj/format/)).
+Supports clusters, 2D data, and channel information. If desired, generates
+unique track identifiers based on cluster and id data from the `.mdf` file.
 
-Reads and writes '.mdf' (MTrackJ Data Format) files. Supports clusters, 2D data, 
-and channel information. If desired, generates unique track identifiers based on 
-cluster and id data from the '.mdf' file.
+## Usage
 
-# Usage
+First load the package with `library(mdftracks)`.
+
+**Reading 3D data: **
 
 ```{r, eval=F}
-library(mdftracks)
+data <- read.mdf('~/mdftracks.mdf')
+head(data, 10)
+```
+
+```{r, echo=F}
+data <- read.mdf('~/stack/mtrackj/121120_RCM_HBC_cell density_complete_p04.mdf')
+head(data, 10)
+```
+
+**Reading 2D data: **
+
+```{r, eval=F}
 data <- read.mdf('~/mdftracks.mdf', drop.Z = T)
 head(data, 10)
 ```
 
 ```{r, echo=F}
-library(mdftracks)
 data <- read.mdf('~/stack/mtrackj/121120_RCM_HBC_cell density_complete_p04.mdf', drop.Z = T)
 head(data, 10)
 ```
 
-# Installation
+**Writing data in `(id, t, x, y, z)` format (e.g., from [MotilityLab](https://github.com/jtextor/MotilityLab)):  **
 
-With the `devtools` package installed:
+```{r, echo=FALSE}
+tracks <- test.df[,c('uid', 't', letters[24:26])]
+```
+
+```{r, collapse=FALSE}
+print(tracks)
+write.mdf(tracks)
+```
+
+**Writing data with cluster, channel, and point information: **
+
+```{r, echo=FALSE}
+tracks <- test.df
+```
+
+```{r, collapse=FALSE}
+print(tracks)
+write.mdf(tracks, cluster.column = 'cl', id.column = 'id', 
+          pos.columns = letters[24:26], channel.column = 'ch', 
+          point.column = "p")
+```
+
+For more information, consult the package documentation.
+
+## Installation
 
 ```{r, eval=F}
-install_github('burgerga/mdftracks')
+install.packages('mdftracks')
 ```

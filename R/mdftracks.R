@@ -1,8 +1,8 @@
-#' mdftracks:  Read and Write MTrackJ Data Format Files
+#' mdftracks:  Read and Write MTrackJ Data Files
 #'
-#' Reads and writes '.mdf' (MTrackJ Data Format) files.
+#' Reads and writes MTrackJ Data Files (`.mdf`).
 #' Supports clusters, 2D data, and channel information. If desired, generates
-#' unique track identifiers based on cluster and id data from the '.mdf' file.
+#' unique track identifiers based on cluster and id data from the `.mdf` file.
 #'
 #' @docType package
 #' @name mdftracks
@@ -14,18 +14,25 @@ NULL
 # Store package local variables
 pkg.env <- new.env(parent = emptyenv())
 pkg.env$mtrackj.version <- '1.5.1'
+pkg.env$mtrackj.header <- "MTrackJ %s Data File"
 
 
-#' Read an MTrackJ Data Format (.mdf) file
+#' Read an MTrackJ Data File (`.mdf`)
 #'
-#' Reads an MTrackJ Data Format (.mdf) file in a data.frame.
+#' Reads an MTrackJ Data File (`.mdf`) file in a data.frame.
 #'
-#' @param file MTrackJ .mdf file with tracking data.
+#' @param file MTrackJ Data File (`.mdf`) file with tracking data.
 #' @param drop.Z drop z-coordinate (for 2D data)
 #' @param include.point.numbers include the point numbers in the mdf file
-#' (**NB** #' these can be different from the time/frame points)
+#' (**NB** these can be different from the time/frame points)
 #' @param include.channel include channel information
 #' @param generate.unique.ids combine cluster and id columns to get unique ids
+#' @param text character string: if file is not supplied and this is, then data
+#' are read from the value of text via a text connection. Notice that a literal
+#' string can be used to include (small) data sets within R code.
+#' @param fileEncoding character string: if non-empty declares the encoding to
+#' be used on a file (not a connection) so the character data can be re-encoded
+#' as they are written. See [base::file()].
 #'
 #' @family mdftracks functions
 #'
@@ -40,8 +47,33 @@ pkg.env$mtrackj.version <- '1.5.1'
 #' read.mdf('~/mdftracks.mdf', generate.unique.ids = T)
 #' }
 read.mdf <- function(file, drop.Z = F, include.point.numbers = FALSE,
-                     include.channel = F, generate.unique.ids = F) {
-  mdf.lines <- readFileLines(file)
+                     include.channel = F, generate.unique.ids = F, text,
+                     fileEncoding = "") {
+  if (missing(file) && !missing(text)) {
+    file <- textConnection(text, encoding = "UTF-8")
+    on.exit(close(file))
+  }
+  if (is.character(file)) {
+    file <- if (nzchar(fileEncoding))
+      file(file, "rt", encoding = fileEncoding)
+    else file(file, "rt")
+    on.exit(close(file))
+  }
+  if (!inherits(file, "connection"))
+    stop("'file' must be a character string or connection")
+  if (!isOpen(file, "rt")) {
+    open(file, "rt")
+    on.exit(close(file))
+  }
+
+  # Read first line
+  mdf.lines <- readLines(file, n = 1)
+  if(!grepl(sprintf(pkg.env$mtrackj.header, '[0-9]+(.[0-9]+)*'), mdf.lines)) {
+    stop("does not appear to be an MTrackJ Data File")
+  }
+  message(mdf.lines)
+  mdf.lines <- c(mdf.lines, readLines(file))
+
   cluster.bounds <- getClusterBounds(mdf.lines)
   cluster.lines.list <- getClusterLines(mdf.lines, cluster.bounds)
   cluster.track.list <- lapply(cluster.lines.list, getClusterTracks)
@@ -77,9 +109,9 @@ read.mdf <- function(file, drop.Z = F, include.point.numbers = FALSE,
 }
 
 
-#' Write an MTrackJ Data Format (.mdf) file
+#' Write an MTrackJ Data File (`.mdf`)
 #'
-#' Writes a data.frame with tracking information as an MTrackJ Data Format (.mdf)
+#' Writes a data.frame with tracking information as an MTrackJ Data File (`.mdf`)
 #' file. Allows flexible column specification, and to avoid errors the column
 #' mapping used for writing is reported back to the user. Writing tracking data in
 #' 'id time x y z' format, for example, from the MotilityLab package, doesn't
@@ -166,14 +198,14 @@ write.mdf <- function(x, file = "", cluster.column = NA, id.column = 1,
     else file(file, "w")
     on.exit(close(file))
   }
-  else if (!isOpen(file, "w")) {
+  if (!inherits(file, "connection"))
+    stop("'file' must be a character string or connection")
+  if (!isOpen(file, "w")) {
     open(file, "w")
     on.exit(close(file))
   }
-  if (!inherits(file, "connection"))
-    stop("'file' must be a character string or connection")
 
-  writeLines(sprintf("MTrackJ %s Data File", pkg.env$mtrackj.version), file,
+  writeLines(sprintf(pkg.env$mtrackj.header, pkg.env$mtrackj.version), file,
              sep = '\n')
   writeLines("Assembly 1", file, sep = '\n')
   cluster.l <- split(x, x[cn['cl']])
@@ -201,19 +233,11 @@ write.mdf <- function(x, file = "", cluster.column = NA, id.column = 1,
 }
 
 
-getMTrackJVersion <- function(mdf.lines) {
-  first.line.split <- strsplit(mdf.lines[[1]], " ")[[1]]
-  stopifnot(first.line.split[1] == "MTrackJ")
-  first.line.split[2]
-}
-
-
-readFileLines <- function(file) {
-  con <- file(file, open="r")
-  on.exit(close(con))
-  readLines(con)
-}
-
+# getMTrackJVersion <- function(mdf.lines) {
+#   first.line.split <- strsplit(mdf.lines[[1]], " ")[[1]]
+#   stopifnot(first.line.split[1] == "MTrackJ")
+#   first.line.split[2]
+# }
 
 getTrackBounds <- function(mdf.lines) {
   track.lines <- grep("^Track", mdf.lines)
@@ -248,9 +272,7 @@ getClusterTracks <- function(cluster.lines) {
     # Filter out Point lines
     t <- t[grep("^Point", t)]
     # Read lines as data frame
-    con <- textConnection(t)
-    on.exit(close(con))
-    t.df <- read.delim(con, sep = " ", header = F)
+    t.df <- read.delim(sep = " ", header = F, text = t)
     # Rename columns
     colnames(t.df) <- c('id', 'point', 'x', 'y', 'z', 'time', 'channel')
     # Put in the correct track id

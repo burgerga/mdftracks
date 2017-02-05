@@ -1,9 +1,9 @@
 Package: mdftracks
 Type: Package
-Title: Read and Write 'MTrackJ' Data Format Files
-Version: 0.1.0
+Title: Read and Write 'MTrackJ' Data Files
+Version: 0.2.0
 Authors@R: person("Gerhard", "Burger", email = "burger.ga@gmail.com", role = c("aut", "cre"))
-Description: Reads and writes '.mdf' ('MTrackJ' Data Format) files. 
+Description: Reads and writes 'MTrackJ' Data Files ('.mdf'). 
     Supports clusters, 2D data, and channel information. If desired, generates 
     unique track  identifiers based on cluster and id data from the '.mdf' file. 
     Easy export from 'MotilityLab' tracking data. See the project page for more
@@ -15,4 +15,4 @@ URL: https://github.com/burgerga/mdftracks
 BugReports: https://github.com/burgerga/mdftracks/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.0
-Suggests: testthat
+Suggests: testthat, tools

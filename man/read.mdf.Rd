@@ -2,25 +2,33 @@
 % Please edit documentation in R/mdftracks.R
 \name{read.mdf}
 \alias{read.mdf}
-\title{Read an MTrackJ Data Format (.mdf) file}
+\title{Read an MTrackJ Data File (\code{.mdf})}
 \usage{
 read.mdf(file, drop.Z = F, include.point.numbers = FALSE,
-  include.channel = F, generate.unique.ids = F)
+  include.channel = F, generate.unique.ids = F, text, fileEncoding = "")
 }
 \arguments{
-\item{file}{MTrackJ .mdf file with tracking data.}
+\item{file}{MTrackJ Data File (\code{.mdf}) file with tracking data.}
 
 \item{drop.Z}{drop z-coordinate (for 2D data)}
 
 \item{include.point.numbers}{include the point numbers in the mdf file
-(\strong{NB} #' these can be different from the time/frame points)}
+(\strong{NB} these can be different from the time/frame points)}
 
 \item{include.channel}{include channel information}
 
 \item{generate.unique.ids}{combine cluster and id columns to get unique ids}
+
+\item{text}{character string: if file is not supplied and this is, then data
+are read from the value of text via a text connection. Notice that a literal
+string can be used to include (small) data sets within R code.}
+
+\item{fileEncoding}{character string: if non-empty declares the encoding to
+be used on a file (not a connection) so the character data can be re-encoded
+as they are written. See \code{\link[base:file]{base::file()}}.}
 }
 \description{
-Reads an MTrackJ Data Format (.mdf) file in a data.frame.
+Reads an MTrackJ Data File (\code{.mdf}) file in a data.frame.
 }
 \examples{
 \dontrun{
