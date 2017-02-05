@@ -1,8 +1,8 @@
-#' mdftracks:  Read and Write MTrackJ Data Format Files
+#' mdftracks:  Read and Write MTrackJ Data Files
 #'
-#' Reads and writes '.mdf' (MTrackJ Data Format) files.
+#' Reads and writes MTrackJ Data Files (`.mdf`).
 #' Supports clusters, 2D data, and channel information. If desired, generates
-#' unique track identifiers based on cluster and id data from the '.mdf' file.
+#' unique track identifiers based on cluster and id data from the `.mdf` file.
 #'
 #' @docType package
 #' @name mdftracks
@@ -17,14 +17,14 @@ pkg.env$mtrackj.version <- '1.5.1'
 pkg.env$mtrackj.header <- "MTrackJ %s Data File"
 
 
-#' Read an MTrackJ Data Format (.mdf) file
+#' Read an MTrackJ Data File (`.mdf`)
 #'
-#' Reads an MTrackJ Data Format (.mdf) file in a data.frame.
+#' Reads an MTrackJ Data File (`.mdf`) file in a data.frame.
 #'
-#' @param file MTrackJ .mdf file with tracking data.
+#' @param file MTrackJ Data File (`.mdf`) file with tracking data.
 #' @param drop.Z drop z-coordinate (for 2D data)
 #' @param include.point.numbers include the point numbers in the mdf file
-#' (**NB** #' these can be different from the time/frame points)
+#' (**NB** these can be different from the time/frame points)
 #' @param include.channel include channel information
 #' @param generate.unique.ids combine cluster and id columns to get unique ids
 #' @param text character string: if file is not supplied and this is, then data
@@ -109,9 +109,9 @@ read.mdf <- function(file, drop.Z = F, include.point.numbers = FALSE,
 }
 
 
-#' Write an MTrackJ Data Format (.mdf) file
+#' Write an MTrackJ Data File (`.mdf`)
 #'
-#' Writes a data.frame with tracking information as an MTrackJ Data Format (.mdf)
+#' Writes a data.frame with tracking information as an MTrackJ Data File (`.mdf`)
 #' file. Allows flexible column specification, and to avoid errors the column
 #' mapping used for writing is reported back to the user. Writing tracking data in
 #' 'id time x y z' format, for example, from the MotilityLab package, doesn't

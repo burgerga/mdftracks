@@ -2,7 +2,7 @@
 % Please edit documentation in R/mdftracks.R
 \name{write.mdf}
 \alias{write.mdf}
-\title{Write an MTrackJ Data Format (.mdf) file}
+\title{Write an MTrackJ Data File (\code{.mdf})}
 \usage{
 write.mdf(x, file = "", cluster.column = NA, id.column = 1,
   time.column = 2, scale.time = 1, pos.columns = c(3, 4, 5),
@@ -46,7 +46,7 @@ be used on a file (not a connection) so the character data can be re-encoded
 as they are written. See \code{\link[base:file]{base::file()}}.}
 }
 \description{
-Writes a data.frame with tracking information as an MTrackJ Data Format (.mdf)
+Writes a data.frame with tracking information as an MTrackJ Data File (\code{.mdf})
 file. Allows flexible column specification, and to avoid errors the column
 mapping used for writing is reported back to the user. Writing tracking data in
 'id time x y z' format, for example, from the MotilityLab package, doesn't
