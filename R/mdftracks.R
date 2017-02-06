@@ -232,9 +232,8 @@ write.mdf <- function(x, file = "", cluster.column = NA, id.column = 1,
       point.l <- split(track.data, track.data[cn['p']])
       for(point in names(point.l)) {
         pd <- point.l[[point]]
-        writeLines(sprintf("Point %d %.1f %.1f %.1f %.1f %.1f",
-                           as.numeric(point), pd[cn['x']], pd[cn['y']],
-                           pd[cn['z']], pd[cn['t']] * scale.time, pd[cn['ch']]),
+        writeLines(paste("Point", as.integer(point), pd[cn['x']],  pd[cn['y']],
+                         pd[cn['z']],  pd[cn['t']] * scale.time, pd[cn['ch']]),
                    file, sep = '\n')
       }
     }
