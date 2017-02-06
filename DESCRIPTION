@@ -10,6 +10,7 @@ Description: Reads and writes 'MTrackJ' Data Files ('.mdf').
     information examples.
 License: GPL-3 | file LICENSE
 LazyData: TRUE
+Depends: R (>= 2.10)
 Imports: hellno
 URL: https://github.com/burgerga/mdftracks
 BugReports: https://github.com/burgerga/mdftracks/issues
