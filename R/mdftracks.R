@@ -171,6 +171,16 @@ write.mdf <- function(x, file = "", cluster.column = NA, id.column = 1,
   message(paste(c("Using the following column mapping:",
                   capture.output(message.cn)), collapse = '\n'))
 
+  # Get rid of factor columns
+  factor.columns <- sapply(x[ , cn[!is.na(cn)]], is.factor)
+  if(any(factor.columns)) {
+    # Get factor.column names
+    fcn <- names(factor.columns[factor.columns == T])
+    message(paste("Converting factor to numeric in columns:",
+                  paste(fcn, collapse = ", ")))
+    x[fcn] <- lapply(x[fcn], function(x) as.numeric(as.character(x)))
+  }
+
   if(is.na(cn['cl'])) {
     cn['cl'] <- "cl"
     x[cn['cl']] <- 1
