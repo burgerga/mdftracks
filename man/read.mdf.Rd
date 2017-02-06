@@ -31,11 +31,8 @@ as they are written. See \code{\link[base:file]{base::file()}}.}
 Reads an MTrackJ Data File (\code{.mdf}) file in a data.frame.
 }
 \examples{
-\dontrun{
-read.mdf('~/mdftracks.mdf')
+read.mdf(system.file("extdata", "example.mdf", package = 'mdftracks'))
 
-read.mdf('~/mdftracks.mdf', generate.unique.ids = T)
-}
 }
 \seealso{
 \href{https://imagescience.org/meijering/software/mtrackj/format/}{MTrackJ Data Format}

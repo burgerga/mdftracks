@@ -13,13 +13,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, echo=F}
-library('mdftracks')
-load('tests/testthat/test_df.RData')
-```
-
 [![Build Status](https://travis-ci.org/burgerga/mdftracks.svg?branch=master)](https://travis-ci.org/burgerga/mdftracks)
 [![codecov](https://codecov.io/gh/burgerga/mdftracks/branch/master/graph/badge.svg)](https://codecov.io/gh/burgerga/mdftracks)
+[![License: GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
 Reads and writes **[MTrackJ](https://imagescience.org/meijering/software/mtrackj/) Data Files** ([`.mdf`](https://imagescience.org/meijering/software/mtrackj/format/)).
 Supports clusters, 2D data, and channel information. If desired, generates
@@ -27,52 +23,43 @@ unique track identifiers based on cluster and id data from the `.mdf` file.
 
 ## Usage
 
-First load the package with `library(mdftracks)`.
+First load the package with 
+```{r}
+library(mdftracks)
+```
 
 **Reading 3D data: **
 
-```{r, eval=F}
-data <- read.mdf('~/mdftracks.mdf')
+```{r}
+mdf.file <- system.file("extdata", "example.mdf", package = 'mdftracks')
+data <- read.mdf(mdf.file)
 head(data, 10)
 ```
 
-```{r, echo=F}
-data <- read.mdf('~/stack/mtrackj/121120_RCM_HBC_cell density_complete_p04.mdf')
-head(data, 10)
-```
+**Dropping the z-coordinate for 2D data: **
 
-**Reading 2D data: **
-
-```{r, eval=F}
-data <- read.mdf('~/mdftracks.mdf', drop.Z = T)
-head(data, 10)
-```
-
-```{r, echo=F}
-data <- read.mdf('~/stack/mtrackj/121120_RCM_HBC_cell density_complete_p04.mdf', drop.Z = T)
+```{r}
+data <- read.mdf(mdf.file, drop.Z = T)
 head(data, 10)
 ```
 
 **Writing data in `(id, t, x, y, z)` format (e.g., from [MotilityLab](https://github.com/jtextor/MotilityLab)):  **
 
-```{r, echo=FALSE}
-tracks <- test.df[,c('uid', 't', letters[24:26])]
+```{r}
+library('MotilityLab')
+tracks.df <- as.data.frame(TCells)
 ```
 
 ```{r, collapse=FALSE}
-print(tracks)
-write.mdf(tracks)
+head(tracks.df, 10)
+write.mdf(head(tracks.df, 10))
 ```
 
 **Writing data with cluster, channel, and point information: **
 
-```{r, echo=FALSE}
-tracks <- test.df
-```
-
 ```{r, collapse=FALSE}
-print(tracks)
-write.mdf(tracks, cluster.column = 'cl', id.column = 'id', 
+print(mdftracks.example.data)
+write.mdf(mdftracks.example.data, cluster.column = 'cl', id.column = 'id',  
           pos.columns = letters[24:26], channel.column = 'ch', 
           point.column = "p")
 ```

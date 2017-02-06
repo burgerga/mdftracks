@@ -54,12 +54,17 @@ require additional arguments.
 }
 \examples{
 \dontrun{
-write.mdf(x, '~/mdftracks.mdf')
-
-# 2D data with column name specification
-write.mdf(x, '~/mdftracks.mdf', id.column = 'uid', time.column = 't',
-          pos.columns = letters[24:25])
+# Output to file
+write.mdf(mdftracks.example.data, '~/example.mdf', id.column = 'uid',
+          time.column = 't', pos.columns = letters[24:26])
 }
+
+# Output to stdout with cluster column
+write.mdf(mdftracks.example.data, cluster.column = 'cl',
+          id.column = 'id', time.column = 't', pos.columns = letters[24:26])
+
+# Output to stdout using data in (id, t, x, y, z) format
+write.mdf(mdftracks.example.data[, c('uid', 't', letters[24:26])])
 
 }
 \seealso{

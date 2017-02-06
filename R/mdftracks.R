@@ -41,11 +41,8 @@ pkg.env$mtrackj.header <- "MTrackJ %s Data File"
 #' @seealso [MTrackJ Data Format](https://imagescience.org/meijering/software/mtrackj/format/)
 #'
 #' @examples
-#' \dontrun{
-#' read.mdf('~/mdftracks.mdf')
+#' read.mdf(system.file("extdata", "example.mdf", package = 'mdftracks'))
 #'
-#' read.mdf('~/mdftracks.mdf', generate.unique.ids = T)
-#' }
 read.mdf <- function(file, drop.Z = F, include.point.numbers = FALSE,
                      include.channel = F, generate.unique.ids = F, text,
                      fileEncoding = "") {
@@ -150,12 +147,17 @@ read.mdf <- function(file, drop.Z = F, include.point.numbers = FALSE,
 #'
 #' @examples
 #' \dontrun{
-#' write.mdf(x, '~/mdftracks.mdf')
-#'
-#' # 2D data with column name specification
-#' write.mdf(x, '~/mdftracks.mdf', id.column = 'uid', time.column = 't',
-#'           pos.columns = letters[24:25])
+#' # Output to file
+#' write.mdf(mdftracks.example.data, '~/example.mdf', id.column = 'uid',
+#'           time.column = 't', pos.columns = letters[24:26])
 #' }
+#'
+#' # Output to stdout with cluster column
+#' write.mdf(mdftracks.example.data, cluster.column = 'cl',
+#'           id.column = 'id', time.column = 't', pos.columns = letters[24:26])
+#'
+#' # Output to stdout using data in (id, t, x, y, z) format
+#' write.mdf(mdftracks.example.data[, c('uid', 't', letters[24:26])])
 #'
 #' @importFrom utils capture.output
 write.mdf <- function(x, file = "", cluster.column = NA, id.column = 1,
