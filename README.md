@@ -2,7 +2,7 @@ mdftracks
 ================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/burgerga/mdftracks.svg?branch=master)](https://travis-ci.org/burgerga/mdftracks) [![codecov](https://codecov.io/gh/burgerga/mdftracks/branch/master/graph/badge.svg)](https://codecov.io/gh/burgerga/mdftracks) [![License: GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+![](http://www.r-pkg.org/badges/version/mdftracks) [![Build Status](https://travis-ci.org/burgerga/mdftracks.svg?branch=master)](https://travis-ci.org/burgerga/mdftracks) [![codecov](https://codecov.io/gh/burgerga/mdftracks/branch/master/graph/badge.svg)](https://codecov.io/gh/burgerga/mdftracks) [![License: GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
 Reads and writes **[MTrackJ](https://imagescience.org/meijering/software/mtrackj/) Data Files** ([`.mdf`](https://imagescience.org/meijering/software/mtrackj/format/)). Supports clusters, 2D data, and channel information. If desired, generates unique track identifiers based on cluster and id data from the `.mdf` file.
 
