@@ -15,7 +15,7 @@ First load the package with
 library(mdftracks)
 ```
 
-**Reading 3D data: **
+**Reading 3D data**
 
 ``` r
 mdf.file <- system.file("extdata", "example.mdf", package = 'mdftracks')
@@ -35,7 +35,7 @@ head(data, 10)
 #> 1.1.10       1  1   10 823 125 1
 ```
 
-**Dropping the z-coordinate for 2D data: **
+**Dropping the z-coordinate for 2D data**
 
 ``` r
 data <- read.mdf(mdf.file, drop.Z = T)
@@ -54,7 +54,7 @@ head(data, 10)
 #> 1.1.10       1  1   10 823 125
 ```
 
-**Writing data in `(id, t, x, y, z)` format (e.g., from [MotilityLab](https://github.com/jtextor/MotilityLab)): **
+**Writing data in `(id, t, x, y, z)` format (e.g., from [MotilityLab](https://github.com/jtextor/MotilityLab))**
 
 ``` r
 library('MotilityLab')
@@ -103,7 +103,7 @@ write.mdf(head(tracks.df, 10))
     #> Point 10 131.7630004883 117.6630020142 6.25 249.8899993896 1
     #> End of MTrackJ Data File
 
-**Writing data with cluster, channel, and point information: **
+**Writing data with cluster, channel, and point information**
 
 ``` r
 print(mdftracks.example.data)
