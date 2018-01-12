@@ -160,3 +160,28 @@ Installation
 ``` r
 install.packages('mdftracks')
 ```
+
+How to cite?
+------------
+
+Please use the R command `citation(package = "mdftracks")` to get the most up-to-date citation. Example for v0.2.0:
+
+``` r
+citation(package = "mdftracks")
+#> 
+#> To cite package 'mdftracks' in publications use:
+#> 
+#>   Gerhard Burger (2017). mdftracks: Read and Write 'MTrackJ Data
+#>   Files'. R package version 0.2.0.
+#>   https://CRAN.R-project.org/package=mdftracks
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {mdftracks: Read and Write 'MTrackJ Data Files'},
+#>     author = {Gerhard Burger},
+#>     year = {2017},
+#>     note = {R package version 0.2.0},
+#>     url = {https://CRAN.R-project.org/package=mdftracks},
+#>   }
+```

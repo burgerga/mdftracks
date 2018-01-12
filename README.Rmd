@@ -72,3 +72,12 @@ For more information, consult the package documentation.
 ```{r, eval=F}
 install.packages('mdftracks')
 ```
+
+## How to cite?
+
+Please use the R command `citation(package = "mdftracks")` to get the most up-to-date citation. Example for v0.2.0:
+
+```{r}
+citation(package = "mdftracks")
+```
+
