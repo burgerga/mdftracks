@@ -227,7 +227,7 @@ write.mdf <- function(x, file = "", cluster.column = NA, id.column = 1,
     for(track in names(track.l)) {
       writeLines(sprintf("Track %d", as.numeric(track)), file, sep = '\n')
       track.data <- track.l[[track]]
-      track.data <- track.data[order(track.data[cn['t']]), ]
+      track.data <- track.data[order(track.data[[cn['t']]]), ]
       if(generate.points) {
         track.data[cn['p']] <- 1:nrow(track.data)
       }

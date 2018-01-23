@@ -17,5 +17,5 @@ Imports: hellno
 URL: https://github.com/burgerga/mdftracks
 BugReports: https://github.com/burgerga/mdftracks/issues
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.0
-Suggests: testthat, tools
+RoxygenNote: 6.0.1
+Suggests: testthat, tools, tibble

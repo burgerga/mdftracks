@@ -35,6 +35,11 @@ test_that("Data frames with columns id, t, x, y, z (MotilyLab) can be exported
                 ref_expected_output)
 })
 
+test_that("Writing tibbles works", {
+  expect_output(write.mdf(tibble::as_tibble(test.df[,c('uid','t', 'x', 'y', 'z')])),
+                ref_expected_output)
+})
+
 test_that("Factor columns are converted to numeric", {
   temp.df <- test.df[,c('uid','t', 'x', 'y', 'z')]
   temp.df$uid <- as.factor(temp.df$uid)
