@@ -68,7 +68,7 @@ read.mdf <- function(file, drop.Z = F, include.point.numbers = FALSE,
   if(!grepl(sprintf(pkg.env$mtrackj.header, '[0-9]+(.[0-9]+)*'), mdf.lines)) {
     stop("does not appear to be an MTrackJ Data File")
   }
-  message(mdf.lines)
+  # message(mdf.lines) # Print mdf version info from file
   mdf.lines <- c(mdf.lines, readLines(file))
 
   cluster.bounds <- getClusterBounds(mdf.lines)
