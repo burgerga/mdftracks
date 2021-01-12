@@ -4,8 +4,15 @@
 \alias{read.mdf}
 \title{Read an MTrackJ Data File (\code{.mdf})}
 \usage{
-read.mdf(file, drop.Z = F, include.point.numbers = FALSE,
-  include.channel = F, generate.unique.ids = F, text, fileEncoding = "")
+read.mdf(
+  file,
+  drop.Z = F,
+  include.point.numbers = FALSE,
+  include.channel = F,
+  generate.unique.ids = F,
+  text,
+  fileEncoding = ""
+)
 }
 \arguments{
 \item{file}{MTrackJ Data File (\code{.mdf}) file with tracking data.}
@@ -25,7 +32,7 @@ string can be used to include (small) data sets within R code.}
 
 \item{fileEncoding}{character string: if non-empty declares the encoding to
 be used on a file (not a connection) so the character data can be re-encoded
-as they are written. See \code{\link[base:file]{base::file()}}.}
+as they are written. See \code{\link[base:connections]{base::file()}}.}
 }
 \description{
 Reads an MTrackJ Data File (\code{.mdf}) file in a data.frame.
@@ -37,5 +44,7 @@ read.mdf(system.file("extdata", "example.mdf", package = 'mdftracks'))
 \seealso{
 \href{https://imagescience.org/meijering/software/mtrackj/format/}{MTrackJ Data Format}
 
-Other mdftracks functions: \code{\link{write.mdf}}
+Other mdftracks functions: 
+\code{\link{write.mdf}()}
 }
+\concept{mdftracks functions}

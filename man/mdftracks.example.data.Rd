@@ -4,7 +4,8 @@
 \name{mdftracks.example.data}
 \alias{mdftracks.example.data}
 \title{Example data to show mdftracks functionality}
-\format{A data frame with 10 rows and 9 variables
+\format{
+A data frame with 10 rows and 9 variables
 \describe{
 \item{cl}{track cluster}
 \item{id}{track identifier (in cluster)}
@@ -15,7 +16,8 @@
 \item{t}{time of point}
 \item{ch}{track channel}
 \item{uid}{track identifier (unique over clusters)}
-}}
+}
+}
 \source{
 Self-generated
 }

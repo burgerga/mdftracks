@@ -4,10 +4,19 @@
 \alias{write.mdf}
 \title{Write an MTrackJ Data File (\code{.mdf})}
 \usage{
-write.mdf(x, file = "", cluster.column = NA, id.column = 1,
-  time.column = 2, scale.time = 1, pos.columns = c(3, 4, 5),
-  channel.column = NA, point.column = NA, default.channel = 1,
-  fileEncoding = "")
+write.mdf(
+  x,
+  file = "",
+  cluster.column = NA,
+  id.column = 1,
+  time.column = 2,
+  scale.time = 1,
+  pos.columns = c(3, 4, 5),
+  channel.column = NA,
+  point.column = NA,
+  default.channel = 1,
+  fileEncoding = ""
+)
 }
 \arguments{
 \item{x}{the data.frame with track information.}
@@ -43,7 +52,7 @@ specified.}
 
 \item{fileEncoding}{character string: if non-empty declares the encoding to
 be used on a file (not a connection) so the character data can be re-encoded
-as they are written. See \code{\link[base:file]{base::file()}}.}
+as they are written. See \code{\link[base:connections]{base::file()}}.}
 }
 \description{
 Writes a data.frame with tracking information as an MTrackJ Data File (\code{.mdf})
@@ -70,5 +79,7 @@ write.mdf(mdftracks.example.data[, c('uid', 't', letters[24:26])])
 \seealso{
 \href{https://imagescience.org/meijering/software/mtrackj/format/}{MTrackJ Data Format}
 
-Other mdftracks functions: \code{\link{read.mdf}}
+Other mdftracks functions: 
+\code{\link{read.mdf}()}
 }
+\concept{mdftracks functions}

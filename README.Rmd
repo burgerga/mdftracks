@@ -18,9 +18,28 @@ knitr::opts_chunk$set(
 [![codecov](https://codecov.io/gh/burgerga/mdftracks/branch/master/graph/badge.svg)](https://codecov.io/gh/burgerga/mdftracks)
 [![License: GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
-Reads and writes **[MTrackJ](https://imagescience.org/meijering/software/mtrackj/) Data Files** ([`.mdf`](https://imagescience.org/meijering/software/mtrackj/format/)).
+## Overview
+
+mdftracks reads and writes **[MTrackJ](https://imagescience.org/meijering/software/mtrackj/) Data Files** ([`.mdf`](https://imagescience.org/meijering/software/mtrackj/format/)).
 Supports clusters, 2D data, and channel information. If desired, generates
 unique track identifiers based on cluster and id data from the `.mdf` file.
+
+## Installation
+
+```{r, eval=F}
+install.packages('mdftracks')
+```
+
+### Development version
+
+To get a bug fix or to use a feature from the development version, you can install the development version from GitHub.
+
+```{r, eval=F}
+# install.packages("remotes")
+remotes::install_github("burgerga/mdftracks")
+
+```
+
 
 ## Usage
 
@@ -29,7 +48,7 @@ First load the package with
 library(mdftracks)
 ```
 
-**Reading 3D data**
+### Reading 3D data
 
 ```{r}
 mdf.file <- system.file("extdata", "example.mdf", package = 'mdftracks')
@@ -37,17 +56,17 @@ data <- read.mdf(mdf.file)
 head(data, 10)
 ```
 
-**Dropping the z-coordinate for 2D data**
+### Dropping the z-coordinate for 2D data
 
 ```{r}
 data <- read.mdf(mdf.file, drop.Z = T)
 head(data, 10)
 ```
 
-**Writing data in `(id, t, x, y, z)` format (e.g., from [MotilityLab](https://github.com/jtextor/MotilityLab))**
+### Writing data in `(id, t, x, y, z)` format (e.g., from [celltrackR](https://github.com/ingewortel/celltrackR))
 
 ```{r}
-library('MotilityLab')
+library('celltrackR')
 tracks.df <- as.data.frame(TCells)
 ```
 
@@ -56,7 +75,7 @@ head(tracks.df, 10)
 write.mdf(head(tracks.df, 10))
 ```
 
-**Writing data with cluster, channel, and point information**
+### Writing data with cluster, channel, and point information
 
 ```{r, collapse=FALSE}
 print(mdftracks.example.data)
@@ -65,19 +84,5 @@ write.mdf(mdftracks.example.data, cluster.column = 'cl', id.column = 'id',
           point.column = "p")
 ```
 
-For more information, consult the package documentation.
-
-## Installation
-
-```{r, eval=F}
-install.packages('mdftracks')
-```
-
-## How to cite?
-
-Please use the R command `citation(package = "mdftracks")` to get the most up-to-date citation. Example for v0.2.0:
-
-```{r}
-citation(package = "mdftracks")
-```
+For more information, please consult the package documentation.
 

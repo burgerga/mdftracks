@@ -3,7 +3,6 @@
 \docType{package}
 \name{mdftracks}
 \alias{mdftracks}
-\alias{mdftracks-package}
 \title{mdftracks:  Read and Write MTrackJ Data Files}
 \description{
 Reads and writes MTrackJ Data Files (\code{.mdf}).
