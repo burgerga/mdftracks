@@ -7,7 +7,6 @@
 #' @docType package
 #' @name mdftracks
 #' @seealso [MTrackJ Data Format](https://imagescience.org/meijering/software/mtrackj/format/)
-#' @import hellno
 NULL
 
 
@@ -293,7 +292,7 @@ getClusterTracks <- function(cluster.lines) {
   }))
   # Bind list together to get the DF, then convert to data matrix (make numeric),
   # then back to DF
-  as.data.frame(data.matrix(do.call(rbind, track.df.l)))
+  as.data.frame(data.matrix(do.call(rbind, track.df.l)), stringsAsFactors = F)
 }
 
 
