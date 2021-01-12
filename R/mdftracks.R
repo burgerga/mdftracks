@@ -110,7 +110,7 @@ read.mdf <- function(file, drop.Z = F, include.point.numbers = FALSE,
 #' Writes a data.frame with tracking information as an MTrackJ Data File (`.mdf`)
 #' file. Allows flexible column specification, and to avoid errors the column
 #' mapping used for writing is reported back to the user. Writing tracking data in
-#' 'id time x y z' format, for example, from the MotilityLab package, doesn't
+#' 'id time x y z' format, for example, from the celltrackR package, doesn't
 #' require additional arguments.
 #'
 #' @family mdftracks functions
@@ -143,6 +143,7 @@ read.mdf <- function(file, drop.Z = F, include.point.numbers = FALSE,
 #' as they are written. See [base::file()].
 #'
 #' @seealso [MTrackJ Data Format](https://imagescience.org/meijering/software/mtrackj/format/)
+#' @seealso [celltrackR](https://github.com/ingewortel/celltrackR)
 #'
 #' @examples
 #' \dontrun{
