@@ -18,4 +18,9 @@ BugReports: https://github.com/burgerga/mdftracks/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Encoding: UTF-8
-Suggests: testthat, tools, tibble
+Suggests: 
+    testthat,
+    tools,
+    tibble,
+    spelling
+Language: en-US
