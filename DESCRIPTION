@@ -1,8 +1,11 @@
 Package: mdftracks
 Type: Package
 Title: Read and Write 'MTrackJ Data Files'
-Version: 0.2.0.9999
-Authors@R: person("Gerhard", "Burger", email = "burger.ga@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-1062-5576"))
+Version: 0.2.1
+Authors@R: person("Gerhard", "Burger", 
+                  email = "burger.ga@gmail.com", 
+                  role = c("aut", "cre"), 
+                  comment = c(ORCID = "0000-0003-1062-5576"))
 Description: 'MTrackJ' is an 'ImageJ' plugin for motion tracking and analysis (see 
     <https://imagescience.org/meijering/software/mtrackj/>). This package reads 
     and writes 'MTrackJ Data Files' ('.mdf', see 

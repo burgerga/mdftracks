@@ -1,14 +1,7 @@
-# Change log
-All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).  
-Also [Keep a CHANGELOG](http://keepachangelog.com/).
+# mdftracks 0.2.1
 
-## [Unreleased]
+* Changed order to sort.list to be compatible with upcoming R version
 
-## 0.2.0 - 2017-01-05
-### Added
- - Initial release
- 
-[Unreleased]: https://github.com/burgerga/mdftracks/compare/v0.2.0...HEAD
+# mdftracks 0.2.0
 
-
+* Initial release

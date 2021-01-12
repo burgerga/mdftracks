@@ -1,14 +1,18 @@
+This is a small patch release at the request of CRAN (incompatibility with R-devel when using order on data.frame).
+Used the opportunity to move from travis-ci to gh-actions, and improve README.
+
 ## Test environments
-* manjaro (arch), R 3.3.2
-* ubuntu 12.04 (on travis-ci), R 3.3.2
-* win-builder (devel and release)
+* Windows 10 (R 4.0.3 , r-devel)
+* gh-actions (Windows, macOS, ubuntu (release + devel))
+* (R-hub seems down)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
-* New submission
+## revdepcheck results
 
-## Reverse dependencies
+We checked 0 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
-This is a new release, so there are no reverse dependencies.
+ * We saw 0 new problems
+ * We failed to check 0 packages
