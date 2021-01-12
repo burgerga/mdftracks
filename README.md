@@ -2,13 +2,12 @@ mdftracks
 ================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/mdftracks)](https://cran.r-project.org/package=mdftracks)
-[![Build
-Status](https://travis-ci.org/burgerga/mdftracks.svg?branch=master)](https://travis-ci.org/burgerga/mdftracks)
+[![R-CMD-check](https://github.com/burgerga/mdftracks/workflows/R-CMD-check/badge.svg)](https://github.com/burgerga/mdftracks/actions)
 [![codecov](https://codecov.io/gh/burgerga/mdftracks/branch/master/graph/badge.svg)](https://codecov.io/gh/burgerga/mdftracks)
-[![License:
-GPL-3](https://img.shields.io/badge/license-GPL--3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/mdftracks)](https://cran.r-project.org/package=mdftracks)
+<!-- badges: end -->
 
 ## Overview
 
@@ -42,6 +41,7 @@ First load the package with
 
 ``` r
 library(mdftracks)
+#> Warning: package 'mdftracks' was built under R version 4.1.0
 ```
 
 ### Reading 3D data
