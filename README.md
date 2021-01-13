@@ -41,7 +41,6 @@ First load the package with
 
 ``` r
 library(mdftracks)
-#> Warning: package 'mdftracks' was built under R version 4.1.0
 ```
 
 ### Reading 3D data
