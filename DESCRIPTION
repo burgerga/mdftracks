@@ -1,7 +1,7 @@
 Package: mdftracks
 Type: Package
 Title: Read and Write 'MTrackJ Data Files'
-Version: 0.2.1
+Version: 0.2.1.9000
 Authors@R: person("Gerhard", "Burger", 
                   email = "burger.ga@gmail.com", 
                   role = c("aut", "cre"), 
