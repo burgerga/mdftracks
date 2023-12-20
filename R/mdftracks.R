@@ -1,15 +1,3 @@
-#' mdftracks:  Read and Write MTrackJ Data Files
-#'
-#' Reads and writes MTrackJ Data Files (`.mdf`).
-#' Supports clusters, 2D data, and channel information. If desired, generates
-#' unique track identifiers based on cluster and id data from the `.mdf` file.
-#'
-#' @docType package
-#' @name mdftracks
-#' @seealso [MTrackJ Data Format](https://imagescience.org/meijering/software/mtrackj/format/)
-NULL
-
-
 # Store package local variables
 pkg.env <- new.env(parent = emptyenv())
 pkg.env$mtrackj.version <- '1.5.1'
