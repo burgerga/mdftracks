@@ -4,9 +4,9 @@ mdftracks
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/burgerga/mdftracks/workflows/R-CMD-check/badge.svg)](https://github.com/burgerga/mdftracks/actions)
+[![R-CMD-check](https://github.com/burgerga/mdftracks/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/burgerga/mdftracks/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/burgerga/mdftracks/branch/master/graph/badge.svg)](https://codecov.io/gh/burgerga/mdftracks)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/mdftracks)](https://cran.r-project.org/package=mdftracks)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/mdftracks)](https://cran.r-project.org/package=mdftracks)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4692671.svg)](https://doi.org/10.5281/zenodo.4692671)
 <!-- badges: end -->
 
