@@ -1,0 +1,99 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.5.0
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "mdftracks" in publications use:'
+type: software
+license: GPL-3.0-only
+title: 'mdftracks: Read and Write ''MTrackJ Data Files'''
+version: 0.2.1.9000
+abstract: '''MTrackJ'' is an ''ImageJ'' plugin for motion tracking and analysis (see
+  <https://imagescience.org/meijering/software/mtrackj/>). This package reads and
+  writes ''MTrackJ Data Files'' (''.mdf'', see <https://imagescience.org/meijering/software/mtrackj/format/>).
+  It supports 2D data and read/writes cluster, point, and channel information. If
+  desired, generates track identifiers that are unique over the clusters. See the
+  project page for more information and examples.'
+authors:
+- family-names: Burger
+  given-names: Gerhard
+  email: burger.ga@gmail.com
+  orcid: https://orcid.org/0000-0003-1062-5576
+repository: https://CRAN.R-project.org/package=mdftracks
+repository-code: https://github.com/burgerga/mdftracks
+url: https://github.com/burgerga/mdftracks
+contact:
+- family-names: Burger
+  given-names: Gerhard
+  email: burger.ga@gmail.com
+  orcid: https://orcid.org/0000-0003-1062-5576
+keywords:
+- file-format
+- r
+- tracking
+references:
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2023'
+  institution:
+    name: R Foundation for Statistical Computing
+  version: '>= 2.10'
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2023'
+- type: software
+  title: tools
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Suggests
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2023'
+  institution:
+    name: R Foundation for Statistical Computing
+- type: software
+  title: tibble
+  abstract: 'tibble: Simple Data Frames'
+  notes: Suggests
+  url: https://tibble.tidyverse.org/
+  repository: https://CRAN.R-project.org/package=tibble
+  authors:
+  - family-names: Müller
+    given-names: Kirill
+    email: kirill@cynkra.com
+    orcid: https://orcid.org/0000-0002-1416-3412
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2023'
+- type: software
+  title: spelling
+  abstract: 'spelling: Tools for Spell Checking in R'
+  notes: Suggests
+  url: https://docs.ropensci.org/spelling/
+  repository: https://CRAN.R-project.org/package=spelling
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroen@berkeley.edu
+    orcid: https://orcid.org/0000-0002-4035-0289
+  - family-names: Hester
+    given-names: Jim
+    email: james.hester@rstudio.com
+  year: '2023'
