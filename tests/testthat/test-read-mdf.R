@@ -14,44 +14,50 @@ ref_text <-
 
 ref_text_1_cluster <-
   c("MTrackJ 1.5.1 Data File", "Assembly 1", "Cluster 1", "Track 1",
-  "Point 1 187.1 263.2 27.4 1.0 1.0", "Point 2 309.2 264.4 15.8 2.0 1.0",
-  "Track 2", "Point 1 18.4 438.5 28.1 1.0 1.0", "Point 2 142.9 58.6 28.2 2.0 1.0",
-  "Point 3 290.1 197.5 18.8 3.0 1.0", "Track 3", "Point 1 310.1 15.4 5.8 1.0 1.0",
-  "Track 4", "Point 1 99.1 33.5 22.5 1.0 1.0", "Point 2 220.2 396.0 16.4 2.0 1.0",
-  "Track 5", "Point 1 8.4 305.8 30.2 1.0 1.0", "Point 2 84.7 227.7 21.1 2.0 1.0",
-  "End of MTrackJ Data File")
+    "Point 1 187.1 263.2 27.4 1.0 1.0", "Point 2 309.2 264.4 15.8 2.0 1.0",
+    "Track 2", "Point 1 18.4 438.5 28.1 1.0 1.0", "Point 2 142.9 58.6 28.2 2.0 1.0",
+    "Point 3 290.1 197.5 18.8 3.0 1.0", "Track 3", "Point 1 310.1 15.4 5.8 1.0 1.0",
+    "Track 4", "Point 1 99.1 33.5 22.5 1.0 1.0", "Point 2 220.2 396.0 16.4 2.0 1.0",
+    "Track 5", "Point 1 8.4 305.8 30.2 1.0 1.0", "Point 2 84.7 227.7 21.1 2.0 1.0",
+    "End of MTrackJ Data File")
 
 test_that("Loading without arguments should have cl, id, t, x:z", {
-  expect_equivalent(read.mdf('test_mdf.mdf'),
-                    test.df[,c('cl', 'id', 't', letters[24:26])])
+  expect_equal(read.mdf('test_mdf.mdf'),
+               test.df[,c('cl', 'id', 't', letters[24:26])],
+               ignore_attr = T)
 })
 
 test_that("Reading from file connection works when connection is closed", {
   file <- "test_mdf.mdf"
   con <- file(file)
   expect_false(isOpen(con))
-  expect_equivalent(read.mdf(con),
-                    test.df[,c('cl', 'id', 't', letters[24:26])])
+  expect_equal(read.mdf(con),
+               test.df[,c('cl', 'id', 't', letters[24:26])],
+               ignore_attr = T)
 })
 
 test_that("Testing drop.Z for 2D data", {
-  expect_equivalent(read.mdf('test_mdf.mdf', drop.Z = T),
-                    test.df[,c('cl', 'id', 't', letters[24:25])])
+  expect_equal(read.mdf('test_mdf.mdf', drop.Z = T),
+               test.df[,c('cl', 'id', 't', letters[24:25])],
+               ignore_attr = T)
 })
 
 test_that("Include point numbers", {
-  expect_equivalent(read.mdf('test_mdf.mdf', include.point.numbers = T),
-                    test.df[,c('cl', 'id', 't', letters[24:26], 'p')])
+  expect_equal(read.mdf('test_mdf.mdf', include.point.numbers = T),
+               test.df[,c('cl', 'id', 't', letters[24:26], 'p')],
+               ignore_attr = T)
 })
 
 test_that("Include channel", {
-  expect_equivalent(read.mdf('test_mdf.mdf', include.channel = T),
-                    test.df[,c('cl', 'id', 't', letters[24:26], 'ch')])
+  expect_equal(read.mdf('test_mdf.mdf', include.channel = T),
+               test.df[,c('cl', 'id', 't', letters[24:26], 'ch')],
+               ignore_attr = T)
 })
 
 test_that("Reading from text works", {
-  expect_equivalent(read.mdf(text = ref_text),
-                    test.df[,c('cl', 'id', 't', letters[24:26])])
+  expect_equal(read.mdf(text = ref_text),
+               test.df[,c('cl', 'id', 't', letters[24:26])],
+               ignore_attr = T)
 })
 
 test_that("Generate unique ids", {
@@ -59,8 +65,9 @@ test_that("Generate unique ids", {
   temp.df <- read.mdf(text = ref_text_1_cluster, generate.unique.ids = T)
   expect_equal(temp.df$uid, temp.df$id)
   # With more clusters
-  expect_equivalent(read.mdf('test_mdf.mdf', generate.unique.ids = T),
-                    test.df[,c('cl', 'id', 't', letters[24:26], 'uid')])
+  expect_equal(read.mdf('test_mdf.mdf', generate.unique.ids = T),
+               test.df[,c('cl', 'id', 't', letters[24:26], 'uid')],
+               ignore_attr = T)
 
 })
 

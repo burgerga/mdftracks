@@ -30,9 +30,9 @@ ref.mdf5s <- c('9b98632350636ab11735feed7fb60958', 'ebe73d04d76925f36c6fbeb74f07
 
 test_that("Data frames with columns id, t, x, y, z (MotilyLab) can be exported
           using default arguments (numeric columns)", {
-  expect_output(write.mdf(test.df[,c('uid','t', 'x', 'y', 'z')]),
-                ref_expected_output)
-})
+            expect_output(write.mdf(test.df[,c('uid','t', 'x', 'y', 'z')]),
+                          ref_expected_output)
+          })
 
 test_that("Writing tibbles works", {
   expect_output(write.mdf(tibble::as_tibble(test.df[,c('uid','t', 'x', 'y', 'z')])),
@@ -104,9 +104,9 @@ Track 5
 Point 1 8.4 305.8 30.2 0.1 1
 Point 2 84.7 227.7 21.1 0.2 1
 End of MTrackJ Data File$"
-            expect_output(write.mdf(test.df[,c('uid','t', 'x', 'y', 'z')],
-                                    scale.time = 0.1),
-                          expected_output)
+  expect_output(write.mdf(test.df[,c('uid','t', 'x', 'y', 'z')],
+                          scale.time = 0.1),
+                expected_output)
 })
 
 test_that("Default channel is set correctly", {
