@@ -74,7 +74,7 @@ tracks.df <- as.data.frame(TCells)
 
 ```{r, collapse=FALSE}
 head(tracks.df, 10)
-write.mdf(head(tracks.df, 10))
+write.mdf(head(tracks.df, 10), pos.columns = c(3,4))
 ```
 
 ### Writing data with cluster, channel, and point information
