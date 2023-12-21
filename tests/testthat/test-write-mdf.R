@@ -1,6 +1,5 @@
 library(mdftracks)
 library(tools)
-context("Writing mdf tracks")
 
 # Load reference data
 load('test_df.RData')
