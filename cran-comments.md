@@ -1,10 +1,9 @@
-This is a small patch release at the request of CRAN (incompatibility with R-devel when using order on data.frame).
-Used the opportunity to move from travis-ci to gh-actions, and improve README.
+This is a small patch release at the request of CRAN (update package documentation from NULL to _PACKAGE). Did some small test updates as well (testthat 3).
 
 ## Test environments
-* Windows 10 (R 4.0.3 , r-devel)
+* Local Windows 11 (R 4.3.2)
+* winbuilder (r-devel)
 * gh-actions (Windows, macOS, ubuntu (release + devel))
-* (R-hub seems down)
 
 ## R CMD check results
 
