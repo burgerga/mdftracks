@@ -5,7 +5,8 @@ mdftracks
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/burgerga/mdftracks/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/burgerga/mdftracks/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/burgerga/mdftracks/branch/master/graph/badge.svg)](https://codecov.io/gh/burgerga/mdftracks)
+[![Codecov test
+coverage](https://codecov.io/gh/burgerga/mdftracks/branch/master/graph/badge.svg)](https://app.codecov.io/gh/burgerga/mdftracks?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/mdftracks)](https://cran.r-project.org/package=mdftracks)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4692671.svg)](https://doi.org/10.5281/zenodo.4692671)
 <!-- badges: end -->
